@@ -1,6 +1,7 @@
 package com.knockturnmc.devathlon.listeners;
 
 import com.knockturnmc.devathlon.DevAthlon;
+import com.knockturnmc.devathlon.armorstand.ArmorStandManager;
 import com.knockturnmc.devathlon.particles.Particles;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
@@ -16,7 +17,7 @@ import java.util.List;
 public class PlayerDropListener implements Listener {
     private Particles shape;
     private DevAthlon devAthlon;
-
+    private ArmorStandManager asManager;
     public PlayerDropListener (Particles shape, DevAthlon devAthlon) { this.shape = shape; this.devAthlon = devAthlon;}
 
     @EventHandler

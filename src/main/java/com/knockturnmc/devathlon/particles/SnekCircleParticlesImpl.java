@@ -20,6 +20,8 @@ public class SnekCircleParticlesImpl implements Particles {
         new BukkitRunnable(){
             double time = Math.PI/4;
             Location location = player.getLocation();
+
+            @Override
             public void run(){
                 time = time + 0.02 * Math.PI;
                 for (double i = 0; i <= 2*Math.PI; i = i + Math.PI/32){
