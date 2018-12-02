@@ -16,11 +16,9 @@ public class SnekCircleParticlesImpl implements Particles {
      * @param player
      */
     @Override
-    public void keyEffect(Player player) {
+    public void keyEffect(Player player, Location location) {
         new BukkitRunnable(){
             double time = Math.PI/4;
-            Location location = player.getLocation();
-
             @Override
             public void run(){
                 time = time + 0.02 * Math.PI;

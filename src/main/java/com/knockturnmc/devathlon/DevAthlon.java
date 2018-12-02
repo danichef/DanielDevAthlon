@@ -1,6 +1,7 @@
 package com.knockturnmc.devathlon;
 
 import com.knockturnmc.devathlon.armorstand.ArmorStandManager;
+import com.knockturnmc.devathlon.armorstand.ArmorStandManagerImpl;
 import com.knockturnmc.devathlon.listeners.PlayerDropListener;
 import com.knockturnmc.devathlon.particles.Particles;
 import com.knockturnmc.devathlon.particles.SnekCircleParticlesImpl;
@@ -10,19 +11,19 @@ public class DevAthlon extends JavaPlugin {
 
     private Particles shape;
     private SnekCircleParticlesImpl snekCircle;
-    private ArmorStandManager asManager;
+    private ArmorStandManagerImpl asManagerImpl;
 
     @Override
     public void onEnable() {
         this.snekCircle = new SnekCircleParticlesImpl(this);
-        this.asManager = new ArmorStandManager(this);
+        this.asManagerImpl = new ArmorStandManagerImpl(this);
 
         getServer().getPluginManager().registerEvents(new PlayerDropListener(this.shape, this), this);
     }
 
     @Override
     public void onDisable() {
-        asManager.keyArmorStands.forEach(as -> as.remove());
+        asManagerImpl.keyArmorStands.forEach(as -> as.remove());
     }
 
 

@@ -11,7 +11,7 @@ public class PrefixImpl implements Prefix {
      * @return String
      */
     @Override
-    public String getPREFIX() {
+    public final String getPREFIX() {
         return PREFIX;
     }
 }
