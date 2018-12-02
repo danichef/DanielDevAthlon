@@ -7,7 +7,7 @@ public interface Particles {
 
     /**
      * Spawns some circle formed by snakes in player location
-     * @param player
+     * @param location
      */
-    void keyEffect(Player player, Location location);
+    void keyEffect(Location location);
 }

@@ -23,7 +23,7 @@ public class ArmorStandManagerImpl implements ArmorStandManager {
     public List<ArmorStand> keyArmorStands = new ArrayList<ArmorStand>();
 
     @Override
-    public void spawnKeyArmorStand(ItemStack dropStack, Player player) {
+    public void spawnKeyArmorStand(ItemStack dropStack, Player player, Location keyLoc) {
         Location location = player.getLocation();
 
         ArmorStand as = (ArmorStand) location.getWorld().spawn(location, ArmorStand.class);
@@ -43,7 +43,10 @@ public class ArmorStandManagerImpl implements ArmorStandManager {
 
             @Override
             public void run() {
-                if (i >= 100) {
+                if (i >= 28) {
+                    as.getNearbyEntities(8, 8, 8).stream()
+                            .filter(e -> e instanceof Player)
+                            .forEach(e -> e.teleport(keyLoc));
                     as.remove();
                     this.cancel();
                     return;

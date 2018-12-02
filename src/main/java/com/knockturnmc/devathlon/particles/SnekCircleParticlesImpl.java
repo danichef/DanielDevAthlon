@@ -13,10 +13,10 @@ public class SnekCircleParticlesImpl implements Particles {
 
     /**
      * Spawns some circle formed by snakes in player location
-     * @param player
+     * @param location
      */
     @Override
-    public void keyEffect(Player player, Location location) {
+    public void keyEffect(Location location) {
         new BukkitRunnable(){
             double time = Math.PI/4;
             @Override
@@ -27,7 +27,7 @@ public class SnekCircleParticlesImpl implements Particles {
                     double y = 2 * Math.exp(-0.1*time) * Math.sin(time) + 1.5;
                     double z = time * Math.sin(i);
                     location.add(x,y,z);
-                    player.spawnParticle(Particle.FIREWORKS_SPARK, location,0,0,0,0,1);
+                    location.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, location,0,0,0,0,1);
                     location.subtract(x,y,z);
 
                     i = i + Math.PI/64;
@@ -36,7 +36,7 @@ public class SnekCircleParticlesImpl implements Particles {
                     y = 2*Math.exp(-0.1*time) * Math.sin(time) + 1.5;
                     z = time*Math.sin(i);
                     location.add(x,y,z);
-                    player.getPlayer().spawnParticle(Particle.SPELL_WITCH, location,0,0,0,0,1);
+                    location.getWorld().spawnParticle(Particle.SPELL_WITCH, location,0,0,0,0,1);
                     location.subtract(x,y,z);
                 }
                 if (time > 6){
