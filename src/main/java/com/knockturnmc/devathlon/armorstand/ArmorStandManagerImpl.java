@@ -19,7 +19,6 @@ public class ArmorStandManagerImpl implements ArmorStandManager {
 
     private Random r = new Random();
 
-
     public List<ArmorStand> keyArmorStands = new ArrayList<ArmorStand>();
 
     @Override

@@ -29,7 +29,7 @@ public class PlayerClickListener implements Listener {
         if (!keyType.isKeyEmpty(player.getInventory().getItemInMainHand())) return;
         if (player.getInventory().getItemInMainHand() == null) return;
         ItemStack key = player.getInventory().getItemInMainHand();
-        System.out.print("w");
+
         Location loc = player.getLocation();
         double x = Math.round(loc.getX());
         double y = Math.round(loc.getY());
@@ -41,13 +41,11 @@ public class PlayerClickListener implements Listener {
 
         List<String> newLore = new ArrayList<String>();
         newLore.add("Portkey");
-        newLore.add(ChatColor.GOLD + Double.toString(x));
-        newLore.add(ChatColor.GOLD + Double.toString(y));
-        newLore.add(ChatColor.GOLD + Double.toString(z));
-        newLore.add(ChatColor.GOLD + world);
+        newLore.add(ChatColor.GOLD + "" + ChatColor.MAGIC + Double.toString(x));
+        newLore.add(ChatColor.GOLD + "" + ChatColor.MAGIC + Double.toString(y));
+        newLore.add(ChatColor.GOLD + "" + ChatColor.MAGIC + Double.toString(z));
+        newLore.add(ChatColor.GOLD + "" + ChatColor.MAGIC + world);
         meta.setLore(newLore);
         key.setItemMeta(meta);
-
-        System.out.print("r");
     }
 }

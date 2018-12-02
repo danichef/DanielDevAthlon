@@ -1,5 +1,6 @@
 package com.knockturnmc.devathlon.commands;
 
+import com.knockturnmc.devathlon.keyfactory.BlankKey;
 import com.knockturnmc.devathlon.utils.Permissions;
 import com.knockturnmc.devathlon.utils.Prefix;
 import org.bukkit.ChatColor;
@@ -17,18 +18,20 @@ public class AdminCommand implements CommandExecutor {
 
     private Permissions perms;
     private Prefix prefix;
+    private BlankKey bKey;
 
-    public AdminCommand (Permissions perms, Prefix prefix) {
+    public AdminCommand (Permissions perms, Prefix prefix, BlankKey bKey) {
         this.perms = perms;
         this.prefix = prefix;
+        this.bKey = bKey;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        /**if (!sender.hasPermission(perms.getADMIN_PERMISSION())) {
+        if (!sender.hasPermission(perms.getADMIN_PERMISSION())) {
             sender.sendMessage(prefix.getPREFIX() + ChatColor.RED + "Yeh.... Don't even bother boi! Next time you're getting smited!");
             return true;
-        }**/
+        }
 
         if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "This command can only be used by players");
@@ -36,17 +39,7 @@ public class AdminCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        ItemStack key = new ItemStack(Material.TRIPWIRE_HOOK);
-        ItemMeta meta = key.getItemMeta();
-
-        ArrayList<String> Lore = new ArrayList<String>();
-        meta.setDisplayName(ChatColor.WHITE +  "Blank Portkey");
-        Lore.add("Portkey");
-        Lore.add("Empty");
-        meta.setLore(Lore);
-
-        key.setItemMeta(meta);
-        player.getInventory().addItem(key);
+        player.getInventory().addItem(bKey.blankKey());
         return true;
     }
 }

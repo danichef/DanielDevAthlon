@@ -32,7 +32,7 @@ public class PlayerDropListener implements Listener {
     public void onDrop(PlayerDropItemEvent event) {
         ItemStack drop = event.getItemDrop().getItemStack();
         ItemMeta dropMeta = drop.getItemMeta();
-        if (!keyType.isKey(drop) || keyType.isKeyEmpty(drop)) return;
+        if (keyType.isKeyEmpty(drop)) return;
         Player player = event.getPlayer();
         Location location = player.getLocation();
 

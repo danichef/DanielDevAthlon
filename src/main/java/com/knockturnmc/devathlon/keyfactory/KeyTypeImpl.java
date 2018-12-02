@@ -9,7 +9,7 @@ public class KeyTypeImpl implements KeyType {
 
     @Override
     public boolean isKey(ItemStack key) {
-        //if (!key.getItemMeta().hasLore()) return false;
+        if (key.getItemMeta().getLore() == null) return false;
         List<String> lore = key.getItemMeta().getLore();
         if (lore.contains("Portkey")) {
             return true;
@@ -17,13 +17,12 @@ public class KeyTypeImpl implements KeyType {
                 return false;
             }
     }
-//ChatColor.GOLD + "" + ChatColor.MAGIC  +
+
     @Override
     public boolean isKeyEmpty(ItemStack key) {
         if (!isKey(key)) return false;
-        System.out.print("t");
         List<String> lore = key.getItemMeta().getLore();
-        if (lore.contains("Empty")) {
+        if (lore.contains(ChatColor.GOLD + "" + ChatColor.MAGIC + "Empty")) {
             return true;
         } else {
             return false;
