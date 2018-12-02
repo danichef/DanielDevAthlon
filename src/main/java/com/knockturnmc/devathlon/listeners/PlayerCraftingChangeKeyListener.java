@@ -32,7 +32,7 @@ public class PlayerCraftingChangeKeyListener implements Listener {
             CraftingInventory inv = (CraftingInventory) event.getInventory();
             Player player = (Player) event.getWhoClicked();
             if(inv.getSize() == 4) return;
-            if (!event.getRecipe().equals(cRecipe.craftKey())) {
+            if (event.getRecipe().equals(cRecipe.craftKey())) {
                 if (player.hasPermission(perms.getUSER_PERMISSION())) {
                     ItemStack key = new ItemStack(Material.TRIPWIRE_HOOK);
                     ItemMeta meta = key.getItemMeta();
@@ -51,15 +51,12 @@ public class PlayerCraftingChangeKeyListener implements Listener {
                 }
 
             } else {
-
-
-                List<ItemStack> craftItems = new ArrayList<ItemStack>();
                 ItemStack key = null;
                 ItemStack block = null;
 
                 for (ItemStack is : inv) {
                     if (is != null) {
-                        if (is.getItemMeta().hasLore() && is.getItemMeta().getLore().contains("Portkey")) {
+                        if (is.getItemMeta().hasLore() && is.getItemMeta().getLore().contains("Portkey") && !inv.getResult().getType().equals(Material.TRIPWIRE_HOOK)) {
                             key = is;
                         } else {
                             block = is;
