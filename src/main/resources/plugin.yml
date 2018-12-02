@@ -7,4 +7,6 @@ commands:
 permissions:
   dathlon.admin:
    default: OP
+  devathlon.user:
+   default: OP
 

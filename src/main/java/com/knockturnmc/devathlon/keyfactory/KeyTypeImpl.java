@@ -1,6 +1,7 @@
 package com.knockturnmc.devathlon.keyfactory;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -9,7 +10,8 @@ public class KeyTypeImpl implements KeyType {
 
     @Override
     public boolean isKey(ItemStack key) {
-        if (key.getItemMeta().getLore() == null) return false;
+        if (key.getType() == Material.AIR) return false;
+        if (key.getItemMeta().hasLore()) return false;
         List<String> lore = key.getItemMeta().getLore();
         if (lore.contains("Portkey")) {
             return true;

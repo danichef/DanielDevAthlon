@@ -6,7 +6,6 @@ import com.knockturnmc.devathlon.commands.AdminCommand;
 import com.knockturnmc.devathlon.keyfactory.*;
 import com.knockturnmc.devathlon.listeners.PlayerClickListener;
 import com.knockturnmc.devathlon.listeners.PlayerCraftingChangeKeyListener;
-import com.knockturnmc.devathlon.listeners.PlayerCraftingNewKeyListener;
 import com.knockturnmc.devathlon.listeners.PlayerDropListener;
 import com.knockturnmc.devathlon.particles.Particles;
 import com.knockturnmc.devathlon.particles.SnekCircleParticlesImpl;
@@ -28,7 +27,7 @@ public class DevAthlon extends JavaPlugin {
     private AdminCommand admcmd;
     private PlayerClickListener clickListerner;
     private PlayerDropListener dropListerner;
-    private PlayerCraftingNewKeyListener newKey;
+    private PlayerCraftingChangeKeyListener cKey;
     private BlankKey bKey;
     private CustomRecipe customRecipe;
 
@@ -45,13 +44,14 @@ public class DevAthlon extends JavaPlugin {
         this.keyType = new KeyTypeImpl();
         this.asManager = new ArmorStandManagerImpl(this);
         this.shape = new SnekCircleParticlesImpl(this);
-        this.customRecipe = new CustomRecipeImpl(this.bKey);
-        this.newKey = new PlayerCraftingNewKeyListener(this.customRecipe, this.perms);
+        this.customRecipe = new CustomRecipeImpl();
+        this.cKey = new PlayerCraftingChangeKeyListener(this.customRecipe, this.perms);
+
+        getServer().addRecipe(customRecipe.craftKey());
 
         getServer().getPluginManager().registerEvents(new PlayerDropListener(this.shape, this, this.asManager, this.keyType), this);
         getServer().getPluginManager().registerEvents(new PlayerClickListener(this.keyType), this);
-        getServer().getPluginManager().registerEvents(new PlayerCraftingChangeKeyListener(), this);
-        getServer().getPluginManager().registerEvents(new PlayerCraftingNewKeyListener(this.customRecipe, this.perms), this);
+        getServer().getPluginManager().registerEvents(new PlayerCraftingChangeKeyListener(this.customRecipe, this.perms), this);
 
         getCommand("dadmin").setExecutor(new AdminCommand(this.perms, this.prefix, this.bKey));
     }
