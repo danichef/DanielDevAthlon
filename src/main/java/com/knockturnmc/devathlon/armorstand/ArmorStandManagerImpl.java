@@ -3,23 +3,19 @@ package com.knockturnmc.devathlon.armorstand;
 import com.knockturnmc.devathlon.DevAthlon;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.EulerAngle;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class ArmorStandManagerImpl implements ArmorStandManager {
 
     private DevAthlon devAthlon;
     public ArmorStandManagerImpl (DevAthlon devAthlon) { this.devAthlon = devAthlon; }
 
-    private Random r = new Random();
-
-    public List<ArmorStand> keyArmorStands = new ArrayList<ArmorStand>();
+    public float step = 11.25f;
 
     @Override
     public void spawnKeyArmorStand(ItemStack dropStack, Player player, Location keyLoc) {
@@ -30,19 +26,18 @@ public class ArmorStandManagerImpl implements ArmorStandManager {
         as.setSmall(true);
         as.setGravity(false);
         as.setArms(true);
-        as.setHeadPose(new EulerAngle((float) (r.nextInt(360)),
-                (float) (r.nextInt(360)),
-                (float) (r.nextInt(360))));
+        as.setCustomName("key");
+        as.setCustomNameVisible(false);
+        as.setHeadPose(new EulerAngle((float) (185),
+                (float) (175),
+                (float) (185)));
         as.setHelmet(dropStack);
-
-        keyArmorStands.add(as);
 
         new BukkitRunnable() {
             int i = 0;
-
             @Override
             public void run() {
-                if (i >= 28) {
+                if (i >= 140) {
                     as.getNearbyEntities(8, 8, 8).stream()
                             .filter(e -> e instanceof Player)
                             .forEach(e -> e.teleport(keyLoc));
@@ -51,11 +46,14 @@ public class ArmorStandManagerImpl implements ArmorStandManager {
                     return;
                 }
 
-                as.setHeadPose(new EulerAngle((float) (r.nextInt(360)),
-                        (float) (r.nextInt(360)),
-                        (float) (r.nextInt(360))));
+                Entity e = as;
+
+                Location loc = as.getLocation();
+                loc.setYaw(loc.getYaw() + step);
+                as.teleport(loc);
+
                 i++;
             }
-        }.runTaskTimer(devAthlon, 05,05);
+        }.runTaskTimer(devAthlon, 05, 01);
     }
 }

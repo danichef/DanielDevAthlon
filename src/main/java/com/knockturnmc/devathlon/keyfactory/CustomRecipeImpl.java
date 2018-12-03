@@ -14,21 +14,20 @@ import java.util.ArrayList;
 
 public class CustomRecipeImpl implements CustomRecipe {
 
+    private BlankKey bKey;
+
+    public CustomRecipeImpl (BlankKey bKey) {
+        this.bKey = bKey;
+    }
+
     @Override
     public Recipe craftKey() {
-        ItemStack key = new ItemStack(Material.TRIPWIRE_HOOK);
-        ItemMeta meta = key.getItemMeta();
-        ArrayList<String> Lore = new ArrayList<String>();
-        meta.setDisplayName(ChatColor.WHITE +  "Blank Portkey");
-        Lore.add("Portkey");
-        Lore.add(ChatColor.GOLD + "" + ChatColor.MAGIC + "Empty");
-        meta.setLore(Lore);
-        key.setItemMeta(meta);
+        ItemStack key = bKey.blankKey();
         ShapedRecipe recipe = new ShapedRecipe(key);
 
-        recipe.shape("OIO", "IHI", "OIO");
-        recipe.setIngredient('I', Material.END_ROD);
-        recipe.setIngredient('O', Material.ENDER_PEARL);
+        recipe.shape("HEH", "EIE", "HEH");
+        recipe.setIngredient('I', Material.EYE_OF_ENDER);
+        recipe.setIngredient('E', Material.ENDER_PEARL);
         recipe.setIngredient('H', Material.TRIPWIRE_HOOK);
 
         return recipe;
