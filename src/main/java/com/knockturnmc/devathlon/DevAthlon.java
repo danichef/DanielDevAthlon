@@ -4,10 +4,7 @@ import com.knockturnmc.devathlon.armorstand.ArmorStandManager;
 import com.knockturnmc.devathlon.armorstand.ArmorStandManagerImpl;
 import com.knockturnmc.devathlon.commands.AdminCommand;
 import com.knockturnmc.devathlon.keyfactory.*;
-import com.knockturnmc.devathlon.listeners.PlayerClickListener;
-import com.knockturnmc.devathlon.listeners.PlayerCraftingChangeKeyListener;
-import com.knockturnmc.devathlon.listeners.PlayerDropListener;
-import com.knockturnmc.devathlon.listeners.PlayerListenerCraftingNewKeyListener;
+import com.knockturnmc.devathlon.listeners.*;
 import com.knockturnmc.devathlon.particles.Particles;
 import com.knockturnmc.devathlon.particles.SnekCircleParticlesImpl;
 import com.knockturnmc.devathlon.utils.Permissions;
@@ -48,6 +45,7 @@ public class DevAthlon extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerClickListener(this.keyType), this);
         getServer().getPluginManager().registerEvents(new PlayerCraftingChangeKeyListener(this.perms), this);
         getServer().getPluginManager().registerEvents(new PlayerListenerCraftingNewKeyListener(this.perms, this.customRecipe, this.bKey), this);
+        getServer().getPluginManager().registerEvents(new PlayerPlaceBlockListener(this.keyType), this);
 
         getCommand("dadmin").setExecutor(new AdminCommand(this.perms, this.prefix, this.bKey));
     }
